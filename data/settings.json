@@ -1,0 +1,12 @@
+{
+    "window": {
+        "width": 800,
+        "height": 400,
+        "fullscreen": false
+    },
+
+    "emulation": {
+        "width": 64,
+        "height": 32
+    }
+}
