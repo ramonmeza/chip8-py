@@ -14,7 +14,6 @@ class Emulation(pyg.Surface):
 
     # variable declarations
     _display: Display
-    _time_since_last_frame: float
 
 
     # methods
@@ -30,14 +29,8 @@ class Emulation(pyg.Surface):
 
         # initialize variables
         self._display = Display(display_width, display_height)
-        self._time_since_last_frame = 0.0
 
-    def update(self) -> None:
-        # get delta time
-        ticks: int = pyg.time.get_ticks()
-        dt: float = (ticks - self._time_since_last_frame) / 1000.0
-        self._time_since_last_frame = ticks
-
+    def update(self,dt: float) -> None:
         # do updates 
         self._display.update(dt)
 

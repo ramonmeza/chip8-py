@@ -13,6 +13,7 @@ class App:
 
     # variable declarations
     _is_running: bool
+    _time_since_last_frame: float
     _window: pyg.Surface
     _emulation: Emulation
     
@@ -20,9 +21,12 @@ class App:
     # methods
     def __init__(self) -> None:
         pyg.init()
+
+        self._is_running = False
+        self._time_since_last_frame = 0.0
+
         self._initialize_window()
         self._initialize_emulation()
-        self._run()
 
     def __del__(self) -> None:
         pyg.quit()
@@ -42,7 +46,7 @@ class App:
     def _initialize_emulation(self) -> None:
         self._emulation = Emulation()
 
-    def _run(self):
+    def run(self):
         self._is_running = True
         while self._is_running:
             self._handle_events()
@@ -56,7 +60,12 @@ class App:
                 self._is_running = False
 
     def _update(self) -> None:
-        self._emulation.update()
+        # get delta time
+        ticks: int = pyg.time.get_ticks()
+        dt: float = (ticks - self._time_since_last_frame) / 1000.0
+        self._time_since_last_frame = ticks
+        
+        self._emulation.update(dt)
 
     def _render(self) -> None:
         self._window.blit(pyg.transform.scale(self._emulation, self._window.get_rect().size), (0, 0))
@@ -65,3 +74,4 @@ class App:
 
 if __name__ == '__main__':
     app: App = App()
+    app.run()
