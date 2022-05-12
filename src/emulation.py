@@ -19,7 +19,7 @@ class Emulation(pyg.Surface):
     # methods
     def __init__(self) -> None:
         # get settings
-        settings: dict = Settings.load(Path('data/settings.json'), 'display')
+        settings: dict = Settings.load(Path('data/settings.json5'), 'display')
         display_width: int = settings['width']
         display_height: int = settings['height']
         display_size: tuple = (display_width, display_height)

@@ -34,7 +34,7 @@ class App:
         pyg.quit()
 
     def _initialize_window(self) -> None:
-        settings: dict = Settings.load(Path('data/settings.json'), 'window')
+        settings: dict = Settings.load(Path('data/settings.json5'), 'window')
         window_size: tuple = (settings['width'], settings['height'])
         is_fullscreen: bool = settings['fullscreen']
 
