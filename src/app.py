@@ -15,6 +15,7 @@ class App:
     _is_running: bool
     _window: pyg.Surface
     _emulation: Emulation
+    
 
     # methods
     def __init__(self) -> None:

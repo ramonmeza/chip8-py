@@ -16,10 +16,11 @@ class Emulation(pyg.Surface):
     _display: Display
     _time_since_last_frame: float
 
+
     # methods
     def __init__(self) -> None:
         # get settings
-        settings: dict = Settings.load(Path('data/settings.json'), 'emulation')
+        settings: dict = Settings.load(Path('data/settings.json'), 'display')
         display_width: int = settings['width']
         display_height: int = settings['height']
         display_size: tuple = (display_width, display_height)
