@@ -15,9 +15,12 @@ class Component(abc.ABC):
 
     def update(self, dt: float) -> None:
         ms: float = (1 / self._rate)
+
         if self._time_elapsed >= ms:
             self._time_elapsed -= ms
             self.tick()
+
+        self._time_elapsed += dt
     
     @abc.abstractmethod
     def tick(self) -> None:

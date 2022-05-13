@@ -11,6 +11,7 @@ class SoundTimer(Timer):
     # methods
     def __init__(self, rate: int) -> None:
         super().__init__(rate)
+        self._sound = Sound()
 
     def set_value(self, value: int) -> None:
         super().set_value(value)

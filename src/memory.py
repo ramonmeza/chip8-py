@@ -18,7 +18,11 @@ class Memory:
         self._bytes[address] = value
 
     def get(self, address: int) -> int:
-        return self._bytes[address]
+        try:
+            return self._bytes[address]
+        except IndexError:
+            # probably better to end the emulation at this point...
+            return self._bytes[len(self._bytes) - 1]
 
     def copy(self, offset: int, data: List[int]) -> None:
         for byte in data:
