@@ -6,6 +6,7 @@ from pathlib import Path
 from display import Display
 from memory import Memory
 from settings import Settings
+from stack import Stack
 
 
 class Emulation(pyg.Surface):
@@ -17,6 +18,7 @@ class Emulation(pyg.Surface):
     _settings: dict
     _display: Display
     _memory: Memory
+    _stack: Stack
 
 
     # methods
@@ -32,7 +34,8 @@ class Emulation(pyg.Surface):
         # initialize variables
         self._display = Display(display_settings['width'], display_settings['height'])
         self._memory = Memory(memory_settings['amount'])
-
+        self._stack = Stack()
+        
         # load font
         self._load_font(font_settings['name'])
 

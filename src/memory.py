@@ -25,3 +25,5 @@ class Memory:
             self.set(offset, byte)
             offset += 1
 
+    def draw_sprite(self, sprite: List[int]) -> None:
+        pass
