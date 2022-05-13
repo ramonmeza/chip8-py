@@ -1,11 +1,10 @@
-from audioop import add
-from typing import Array
+from typing import List
 
 
 class Memory:
 
     # variable declarations
-    _bytes: Array[int]
+    _bytes: List[int]
 
 
     # methods
@@ -20,3 +19,9 @@ class Memory:
 
     def get(self, address: int) -> int:
         return self._bytes[address]
+
+    def copy(self, offset: int, data: List[int]) -> None:
+        for byte in data:
+            self.set(offset, byte)
+            offset += 1
+
