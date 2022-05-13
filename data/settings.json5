@@ -24,5 +24,9 @@
 
     soundTimer: {
         rate: 60
+    },
+
+    cpu: {
+        rate: 1000
     }
 }
