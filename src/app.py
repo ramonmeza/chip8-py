@@ -19,6 +19,7 @@ class App:
     _emulation: Emulation
     _gui_manager: gui.UIManager
 
+
     # methods
     def __init__(self) -> None:
         pyg.init()

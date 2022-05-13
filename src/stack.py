@@ -6,6 +6,7 @@ class Stack:
     # variable declarions
     _list: List[Any]
 
+
     # methods
     def __init__(self) -> None:
         self._list = []

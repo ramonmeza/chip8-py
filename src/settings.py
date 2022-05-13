@@ -6,6 +6,7 @@ from typing import Any, Optional
 
 class Settings:
     
+    # methods
     @staticmethod
     def load(path: Path, section: Optional[str] = None) -> Any:
         '''Loads a settings JSON file.'''
