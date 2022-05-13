@@ -2,6 +2,7 @@ import json5
 import pygame as pyg
 
 from pathlib import Path
+from typing import List
 
 from cpu import Cpu
 from display import Display
@@ -18,7 +19,8 @@ class Emulation(pyg.Surface):
     '''
 
     # constants
-    FONT_MEMORY_OFFSET: int = 0x50
+    FONT_MEMORY_OFFSET: int = 0x050
+    ROM_MEMORY_OFFSET: int = 0x200
 
 
     # variable declarations
@@ -55,6 +57,11 @@ class Emulation(pyg.Surface):
         # load font
         self._load_font(font_settings['name'])
 
+        # load a rom
+        # eventually this will move to App
+        self._load_rom(Path('data/roms/octojam1title.ch8'))
+
+
     def _load_font(self, font_name: str) -> None:
         # load font data
         with open('data/fonts.json5', 'r') as fp:
@@ -63,8 +70,12 @@ class Emulation(pyg.Surface):
         # copy data into memory
         self._memory.copy(Emulation.FONT_MEMORY_OFFSET, font_data)
 
+    def _load_rom(self, path: Path) -> None:
+        rom_data: List[int] = list(path.read_bytes())
+        self._memory.copy(Emulation.ROM_MEMORY_OFFSET, rom_data)
+
     def update(self, dt: float) -> None:
-        # do updates 
+        # do updates
         self._display.update(dt)
 
         # render
