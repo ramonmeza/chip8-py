@@ -16,5 +16,13 @@
 
     font: {
         name: 'chip48'
+    },
+
+    delayTimer: {
+        rate: 60
+    },
+
+    soundTimer: {
+        rate: 60
     }
 }

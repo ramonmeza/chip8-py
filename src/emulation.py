@@ -6,7 +6,9 @@ from pathlib import Path
 from display import Display
 from memory import Memory
 from settings import Settings
+from sound_timer import SoundTimer
 from stack import Stack
+from timer import Timer
 
 
 class Emulation(pyg.Surface):
@@ -14,11 +16,17 @@ class Emulation(pyg.Surface):
     Composes and manages the emulation and handles emulation-level events.
     '''
 
+    # constants
+    FONT_MEMORY_OFFSET: int = 0x50
+
+
     # variable declarations
     _settings: dict
     _display: Display
     _memory: Memory
     _stack: Stack
+    _delay_timer: Timer
+    _sound_timer: SoundTimer
 
 
     # methods
@@ -27,6 +35,8 @@ class Emulation(pyg.Surface):
         display_settings: dict = Settings.load(Path('data/settings.json5'), 'display')
         memory_settings: dict = Settings.load(Path('data/settings.json5'), 'memory')
         font_settings: dict = Settings.load(Path('data/settings.json5'), 'font')
+        delay_timer_settings: dict = Settings.load(Path('data/settings.json5'), 'delayTimer')
+        sound_timer_settings: dict = Settings.load(Path('data/settings.json5'), 'soundTimer')
         
         # subclass init
         pyg.Surface.__init__(self, size=(display_settings['width'], display_settings['height']))
@@ -35,6 +45,8 @@ class Emulation(pyg.Surface):
         self._display = Display(display_settings['width'], display_settings['height'])
         self._memory = Memory(memory_settings['amount'])
         self._stack = Stack()
+        self._delay_timer = Timer(delay_timer_settings['rate'])
+        self._sound_timer = SoundTimer(sound_timer_settings['rate'])
         
         # load font
         self._load_font(font_settings['name'])
@@ -45,7 +57,7 @@ class Emulation(pyg.Surface):
             font_data = json5.load(fp)[font_name]
 
         # copy data into memory
-        self._memory.copy(0x50, font_data)
+        self._memory.copy(Emulation.FONT_MEMORY_OFFSET, font_data)
 
     def update(self,dt: float) -> None:
         # do updates 
