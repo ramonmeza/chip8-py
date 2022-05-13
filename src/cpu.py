@@ -1,3 +1,5 @@
+from component import Component
+
 
 class Cpu:
 
@@ -5,11 +7,19 @@ class Cpu:
 
 
     # methods
-    def fetch(self) -> None:
+    def __init__(self, rate: int) -> None:
+        Component.__init__(self, rate)
+    
+    def tick(self) -> None:
+        self._fetch()
+        self._decode()
+        self._execute()
+
+    def _fetch(self) -> None:
         pass
 
-    def decode(self) -> None:
+    def _decode(self) -> None:
         pass
 
-    def execute(self) -> None:
+    def _execute(self) -> None:
         pass

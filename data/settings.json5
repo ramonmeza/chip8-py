@@ -5,28 +5,36 @@
         fullscreen: false
     },
 
-    display: {
-        width: 64,
-        height: 32
-    },
-
-    memory: {
-        amount: 4096
-    },
-
     font: {
+        // name of font to be loaded
         name: 'chip48'
     },
 
+    memory: {
+        // amount of memory (KB)
+        amount: 4096
+    },
+
+    display: {
+        width: 64,
+        height: 32,
+
+        // rate to refresh display (Hz)
+        rate: 60
+    },
+    
     delayTimer: {
+        // rate to decrement timer (Hz)
         rate: 60
     },
 
     soundTimer: {
+        // rate to decrement timer (Hz)
         rate: 60
     },
 
     cpu: {
+        // rate of the  (Hz)
         rate: 1000
     }
 }

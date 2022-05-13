@@ -15,10 +15,8 @@ class SoundTimer(Timer):
     def set_value(self, value: int) -> None:
         super().set_value(value)
 
-        if value > 0:
-            self._sound.start()
-
-    def update(self, dt: float) -> None:
-        super.update(dt)
-        if self.get_value() <= 0:
+    def tick(self) -> None:
+        if self.get_value() > 0 and not self._sound.is_playing():
+            self._sound.play()
+        elif self.get_value() <= 0 and self._sound.is_playing():
             self._sound.stop()

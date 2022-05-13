@@ -3,6 +3,7 @@ import pygame as pyg
 
 from pathlib import Path
 
+from cpu import Cpu
 from display import Display
 from memory import Memory
 from settings import Settings
@@ -27,6 +28,7 @@ class Emulation(pyg.Surface):
     _stack: Stack
     _delay_timer: Timer
     _sound_timer: SoundTimer
+    _cpu: Cpu
 
 
     # methods
@@ -37,16 +39,18 @@ class Emulation(pyg.Surface):
         font_settings: dict = Settings.load(Path('data/settings.json5'), 'font')
         delay_timer_settings: dict = Settings.load(Path('data/settings.json5'), 'delayTimer')
         sound_timer_settings: dict = Settings.load(Path('data/settings.json5'), 'soundTimer')
+        cpu_settings: dict = Settings.load(Path('data/settings.json5'), 'cpu')
         
         # subclass init
         pyg.Surface.__init__(self, size=(display_settings['width'], display_settings['height']))
 
         # initialize variables
-        self._display = Display(display_settings['width'], display_settings['height'])
+        self._display = Display(display_settings['width'], display_settings['height'], display_settings['rate'])
         self._memory = Memory(memory_settings['amount'])
         self._stack = Stack()
         self._delay_timer = Timer(delay_timer_settings['rate'])
         self._sound_timer = SoundTimer(sound_timer_settings['rate'])
+        self._cpu = Cpu(cpu_settings['rate'])
         
         # load font
         self._load_font(font_settings['name'])
@@ -59,7 +63,7 @@ class Emulation(pyg.Surface):
         # copy data into memory
         self._memory.copy(Emulation.FONT_MEMORY_OFFSET, font_data)
 
-    def update(self,dt: float) -> None:
+    def update(self, dt: float) -> None:
         # do updates 
         self._display.update(dt)
 

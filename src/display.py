@@ -1,8 +1,9 @@
-from turtle import width
 import pygame as pyg
 
+from component import Component
 
-class Display:
+
+class Display(Component):
     
     # variable declarations
     _width: int
@@ -11,7 +12,8 @@ class Display:
 
 
     # methods
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(self, width: int, height: int, rate: int) -> None:
+        Component.__init__(self, rate)
         self._width = width
         self._height = height
         self.clear()
@@ -30,8 +32,9 @@ class Display:
                 else:
                     self._pixels[x, y] = (0, 0, 0)
 
-    def update(self, dt: float) -> None:
+    def tick(self) -> None:
         # clear if space is pressed
+        # this is gonna be weird for now...
         if pyg.key.get_pressed()[pyg.K_SPACE]:
             self.clear()
 
