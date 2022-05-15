@@ -58,7 +58,7 @@ class Emulation(pyg.Surface):
 
         # load a rom
         # eventually this will move to App
-        self._load_rom(Path('data/roms/octojam1title.ch8'))
+        self._load_rom(Path('data/roms/tests/bc_test.ch8'))
 
 
     def _load_font(self, font_name: str) -> None:

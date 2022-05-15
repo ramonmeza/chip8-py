@@ -31,20 +31,17 @@ class Cpu(Component):
         self._program_counter = value
 
     def tick(self) -> None:
-        self._fetch()
+        instruction: List[int] = self._fetch()
         self._decode()
         self._execute()
 
-    def _get_op_code(self) -> List[int]:
-        return list([
+    def _fetch(self) -> List[int]:
+        op_code: List[int] = list([
             self._get_memory(self._program_counter),
             self._get_memory(self._program_counter + 1)
         ])
-
-    def _fetch(self) -> None:
-        op_code: List[int] = self._get_op_code()
-        print(op_code)
         self._program_counter += 2
+        return op_code
 
     def _decode(self) -> None:
         pass
